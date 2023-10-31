@@ -12,20 +12,27 @@ int main() {
         }
     }
 
+    int boys_matched[10] = {0};
+    int girls_matched[10] = {0};
+
     // 寻找最佳情侣组合
     for (int i = 0; i < n; i++) {
-        int max = 0;
+        int max = -1;
         int boy, girl;
 
         for (int j = 0; j < n; j++) {
-            if (feelings[i][j] > max) {
+            if (!girls_matched[j] && feelings[i][j] > max) {
                 max = feelings[i][j];
                 boy = i + 1;
                 girl = j + 1;
             }
         }
 
-        printf("boy %d pair with girl %d\n", boy, girl);
+        if (max != -1) {
+            boys_matched[boy - 1] = 1;
+            girls_matched[girl - 1] = 1;
+            printf("boy %d pair with girl %d\n", boy, girl);
+        }
     }
 
     return 0;
